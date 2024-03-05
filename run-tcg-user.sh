@@ -9,5 +9,5 @@ exec qemu-system-aarch64 -m 1024 \
   -device nvme,drive=hd0,serial=BDCF8C72-9BE7-4118-B274-EAD8B0982915,bootindex=0 \
   -drive if=none,file=root.qcow2,id=hd0,media=disk,discard=unmap,detect-zeroes=unmap \
   -device virtio-net-pci,netdev=netdev0 \
-  -netdev bridge,id=netdev0 \
+  -netdev user,id=netdev0 \
   "$@"
