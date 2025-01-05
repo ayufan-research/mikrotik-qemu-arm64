@@ -1,7 +1,7 @@
 #!/bin/bash
 
 exec qemu-system-aarch64 -m 1024 \
-  -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
+  -pflash firmware/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
   -vga none -nographic -monitor none \
   -serial chardev:term0 -chardev stdio,id=term0 \
   -cpu host -smp cpus=2,sockets=1,cores=2,threads=1 \

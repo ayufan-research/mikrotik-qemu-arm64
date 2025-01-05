@@ -1,0 +1,11 @@
+VERSION=7.16.2
+
+if ! which qemu-system-aarch64 &>/dev/null; then
+    if which apt &>/dev/null; then
+        apt install -y ipxe-qemu qemu-efi-aarch64 qemu-system-arm
+    fi
+fi
+
+if [[ ! -f firmware/AAVMF_CODE.fd ]]; then
+    ( cd firmware/ && tar zxf AAVMF_CODE.fd.tgz )
+fi

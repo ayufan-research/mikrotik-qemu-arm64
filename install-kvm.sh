@@ -1,9 +1,8 @@
 #!/bin/bash
 
-VERSION=7.15beta4
-
 set -xeo pipefail
-apt install -y ipxe-qemu qemu-efi-aarch64 qemu-system-arm
+
+source helpers
 
 wget -c https://download.mikrotik.com/routeros/$VERSION/mikrotik-$VERSION-arm64.iso
 
@@ -11,7 +10,7 @@ wget -c https://download.mikrotik.com/routeros/$VERSION/mikrotik-$VERSION-arm64.
 [[ -e root.qcow2 ]] || qemu-img create root.qcow2 1G
 
 exec qemu-system-aarch64 -m 1024 \
-  -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
+  -pflash firmware/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
   -vga none -nographic -monitor none \
   -serial chardev:term0 -chardev stdio,id=term0 \
   -cpu host -smp cpus=2,sockets=1,cores=2,threads=1 \
