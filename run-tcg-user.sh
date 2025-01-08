@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source "$SCRIPT_DIR/helpers"
 
 exec qemu-system-aarch64 -m 1024 \
-  -pflash firmware/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
+  -pflash AAVMF_CODE.fd -pflash efi-vars.qcow2 \
   -vga none -nographic -monitor none \
   -serial chardev:term0 -chardev stdio,id=term0 \
   -cpu cortex-a72 -smp cpus=2,sockets=1,cores=2,threads=1 \

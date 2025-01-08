@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source "$SCRIPT_DIR/helpers"
 
 BR=br0
 
@@ -7,7 +10,7 @@ if ip link show br-lan &>/dev/null; then
 fi
 
 exec qemu-system-aarch64 -m 1024 \
-  -pflash firmware/AAVMF_CODE.fd -pflash efi-vars.qcow2 \
+  -pflash AAVMF_CODE.fd -pflash efi-vars.qcow2 \
   -vga none -nographic -monitor none \
   -serial chardev:term0 -chardev stdio,id=term0 \
   -cpu host -smp cpus=2,sockets=1,cores=2,threads=1 \

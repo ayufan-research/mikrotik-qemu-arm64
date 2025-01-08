@@ -1,3 +1,5 @@
+set -xeo pipefail
+
 VERSION=7.16.2
 
 if ! which qemu-system-aarch64 &>/dev/null; then
@@ -6,6 +8,6 @@ if ! which qemu-system-aarch64 &>/dev/null; then
     fi
 fi
 
-if [[ ! -f firmware/AAVMF_CODE.fd ]]; then
-    ( cd firmware/ && tar zxf AAVMF_CODE.fd.tgz )
+if [[ ! -f "AAVMF_CODE.fd" ]]; then
+    tar zxf "$SCRIPT_DIR/firmware/AAVMF_CODE.fd.tgz"
 fi
